@@ -1,0 +1,10 @@
+﻿<h1>All Phones</h1>
+<h3>@Model.CurrentCategory</h3>
+@{ 
+    foreach (var phone in Model.AllPhones) { 
+        <div>
+            <h2>Model: @phone.Name</h2>
+            <p>Price: @phone.Price.ToString("c")</p>
+        </div>
+    }
+}

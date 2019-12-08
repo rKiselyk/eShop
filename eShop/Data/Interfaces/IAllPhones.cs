@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eShop.Data.Models;
 
 namespace eShop.Data.Interfaces {
-    interface IAllPhones {
-        IEnumerable<Phone> Phones { get; set; }
+    public interface IAllPhones {
+        IEnumerable<Phone> Phones { get;  }
         IEnumerable<Phone> getFavoritePhones { get; set; }
         Phone getObjectPhone(int carId);
     }
