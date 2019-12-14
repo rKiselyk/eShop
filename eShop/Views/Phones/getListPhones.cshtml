@@ -1,10 +1,15 @@
 ﻿<h1>All Phones</h1>
 <h3>@Model.CurrentCategory</h3>
-@{ 
-    foreach (var phone in Model.AllPhones) { 
-        <div>
-            <h2>Model: @phone.Name</h2>
-            <p>Price: @phone.Price.ToString("c")</p>
-        </div>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var phone in Model.AllPhones) {
+            <div class="col-lg-4">
+                <img class="img-thumbnail" src="@phone.Image" alt="@phone.Name" />
+                <h2>@phone.Name</h2>
+                <p>@phone.ShortDescription</p>
+                <p>Price: @phone.Price.ToString("c")</p>
+                <p><a class="btn btn-warning" href="#">More</a></p>
+            </div>
+        }
     }
-}
+</div>

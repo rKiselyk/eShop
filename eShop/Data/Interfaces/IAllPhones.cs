@@ -7,7 +7,7 @@ using eShop.Data.Models;
 namespace eShop.Data.Interfaces {
     public interface IAllPhones {
         IEnumerable<Phone> Phones { get;  }
-        IEnumerable<Phone> getFavoritePhones { get; set; }
+        IEnumerable<Phone> getFavoritePhones { get; }
         Phone getObjectPhone(int carId);
     }
 }

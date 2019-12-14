@@ -10,14 +10,26 @@ using Microsoft.Extensions.Hosting;
 using eShop.Data.Interfaces;
 using eShop.Data.Mocks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using eShop.Data;
+using eShop.Data.Repositiry;
+
 
 namespace eShop {
     public class Startup {
+        private IConfigurationRoot _confString;
+
+        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment hostEnv) {
+            _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            services.AddTransient<IAllPhones,MockPhones>();
-            services.AddTransient<IPhonesCategory, MockCategory>();
+            services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IAllPhones,PhoneRepositiry>();
+            services.AddTransient<IPhonesCategory, CategotyRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
@@ -27,6 +39,12 @@ namespace eShop {
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            using (var scope = app.ApplicationServices.CreateScope()) {
+                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+                DBObjects.Initial(content);
+            }
+
         }
     }
 }

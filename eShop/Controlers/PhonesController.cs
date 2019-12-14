@@ -17,6 +17,7 @@ namespace eShop.Controlers {
         }
 
         public ViewResult getListPhones() {
+            ViewBag.Title = "Page with Phones";
             PhonesListViewModel obj = new PhonesListViewModel();
             obj.AllPhones = _allPhones.Phones;
             obj.CurrentCategory = "Phone";
