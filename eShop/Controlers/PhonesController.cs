@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using eShop.Data.Interfaces;
 using eShop.ViewModels;
+using eShop.Data.Models;
 
 namespace eShop.Controlers {
     public class PhonesController : Controller {
@@ -16,13 +17,34 @@ namespace eShop.Controlers {
             _allCategories = iPhonesCategory;
         }
 
-        public ViewResult getListPhones() {
-            ViewBag.Title = "Page with Phones";
-            PhonesListViewModel obj = new PhonesListViewModel();
-            obj.AllPhones = _allPhones.Phones;
-            obj.CurrentCategory = "Phone";
+        [Route("Phones/getListPhones")]
+        [Route("Phones/getListPhones/{category}")]
+        public ViewResult getListPhones(string category) {
+            string _category = category;
+            IEnumerable<Phone> phones = null;
+            string currentCategory = "";
 
-            return View(obj);
+            if (string.IsNullOrEmpty(category)) {
+                phones = _allPhones.Phones.OrderBy(i => i.Id);
+            } else {
+                if (string.Equals("Iphone", category, StringComparison.OrdinalIgnoreCase)) {
+                    phones = _allPhones.Phones.Where(i => i.Category.CategoryName.Equals("Iphone")).OrderBy(i => i.Id);
+                }
+                if (string.Equals("Android", category, StringComparison.OrdinalIgnoreCase)) {
+                    phones = _allPhones.Phones.Where(i => i.Category.CategoryName.Equals("Android")).OrderBy(i => i.Id);
+                }
+
+                currentCategory = _category;
+            }
+
+            var phoneObj = new PhonesListViewModel {
+                AllPhones = phones,
+                CurrentCategory = currentCategory
+            };
+
+            ViewBag.Title = "Page with Phones";
+
+            return View(phoneObj);
         }
     }
 }

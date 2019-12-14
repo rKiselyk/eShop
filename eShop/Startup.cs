@@ -45,7 +45,12 @@ namespace eShop {
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes => {
+                routes.MapRoute(name: "default", template: "{controller=home}/{action=index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "{Phone}/{action}/{category?}", defaults: new { Controller = "Phone", action = "getListPhones" });
+
+            });
 
             using (var scope = app.ApplicationServices.CreateScope()) {
                 AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
