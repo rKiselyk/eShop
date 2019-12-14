@@ -1,0 +1,10 @@
+﻿@model HomeViewModel
+
+<h1>Best Phones</h1>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Phone phone in Model.FavouritePhones) {
+            @Html.Partial("AllPhones", phone)
+        }
+    }
+</div>
