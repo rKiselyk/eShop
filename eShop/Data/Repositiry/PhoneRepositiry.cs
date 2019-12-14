@@ -15,9 +15,7 @@ namespace eShop.Data.Repositiry {
         }
 
         public IEnumerable<Phone> Phones => _appDBContent.Phone.Include(c => c.Category);
-
         public IEnumerable<Phone> getFavoritePhones => _appDBContent.Phone.Where(p => p.IsFavourite).Include(c => c.Category);
-
         public Phone getObjectPhone(int phoneId) => _appDBContent.Phone.FirstOrDefault(p => p.Id == phoneId);
     }
 }

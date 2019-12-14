@@ -11,5 +11,6 @@ namespace eShop.Data {
 
         public DbSet<Phone> Phone { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<ShopCartItem> ShopCartItems { get; set; }
     }
 }
