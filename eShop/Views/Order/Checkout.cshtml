@@ -1,0 +1,43 @@
+﻿@model Order
+
+<div class="row mb-5">
+    <h3>Order</h3>
+    <form asp-actoin="Checkout" mathod="post" class="form-horizontal">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <div class="col-12">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-fro="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname"></label>
+            <div class="col-12">
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-fro="Surname" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Adress"></label>
+            <div class="col-12">
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-fro="Adress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <div class="col-12">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-fro="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone"></label>
+            <div class="col-12">
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-fro="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <input class="btn btn-success" type="submit" value="End Order"/>
+    </form>
+</div>

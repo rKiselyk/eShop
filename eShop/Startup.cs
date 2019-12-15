@@ -30,6 +30,7 @@ namespace eShop {
             services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAllPhones,PhoneRepositiry>();
             services.AddTransient<IPhonesCategory, CategotyRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
